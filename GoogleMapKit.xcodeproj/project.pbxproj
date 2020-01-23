@@ -67,17 +67,49 @@
 		151E6F8A23D8A387006169AA /* GoogleMapKit */ = {
 			isa = PBXGroup;
 			children = (
-				151E6F8B23D8A387006169AA /* AppDelegate.swift */,
-				151E6F8D23D8A387006169AA /* ContainerViewController.swift */,
-				151E6F8F23D8A387006169AA /* Main.storyboard */,
-				151E6F9223D8A388006169AA /* Assets.xcassets */,
-				151E6F9423D8A388006169AA /* LaunchScreen.storyboard */,
-				151E6F9723D8A388006169AA /* Info.plist */,
-				151E6F9D23D8E4D2006169AA /* MapViewController.swift */,
-				151E6F9F23D8E838006169AA /* PlacesViewController.swift */,
-				151E6FA123D8E8A0006169AA /* Place.swift */,
+				15C1C07F23DA2908002885D8 /* Views */,
+				15C1C07C23DA28C8002885D8 /* Supporting Files */,
+				15C1C07D23DA28E2002885D8 /* Controllers */,
+				15C1C07E23DA28F3002885D8 /* Models */,
 			);
 			path = GoogleMapKit;
+			sourceTree = "<group>";
+		};
+		15C1C07C23DA28C8002885D8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				151E6F9723D8A388006169AA /* Info.plist */,
+				151E6F8B23D8A387006169AA /* AppDelegate.swift */,
+				151E6F9223D8A388006169AA /* Assets.xcassets */,
+				151E6F9423D8A388006169AA /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15C1C07D23DA28E2002885D8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				151E6F8D23D8A387006169AA /* ContainerViewController.swift */,
+				151E6F9D23D8E4D2006169AA /* MapViewController.swift */,
+				151E6F9F23D8E838006169AA /* PlacesViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		15C1C07E23DA28F3002885D8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				151E6FA123D8E8A0006169AA /* Place.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		15C1C07F23DA2908002885D8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				151E6F8F23D8A387006169AA /* Main.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		4C762E68AB82CE4FF99354AF /* Frameworks */ = {
@@ -365,7 +397,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2N9JQ779A7;
-				INFOPLIST_FILE = GoogleMapKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GoogleMapKit/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -384,7 +416,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2N9JQ779A7;
-				INFOPLIST_FILE = GoogleMapKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/GoogleMapKit/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
