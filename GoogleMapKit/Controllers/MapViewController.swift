@@ -65,7 +65,6 @@ class MapViewController: UIViewController {
         placesClient = GMSPlacesClient.shared()
         
     }
-
 }
 
 extension MapViewController: GMSMapViewDelegate, CLLocationManagerDelegate {

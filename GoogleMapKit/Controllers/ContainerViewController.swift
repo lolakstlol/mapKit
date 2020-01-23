@@ -49,7 +49,6 @@ class ContainerViewController: UIViewController {
         controller = newController
         updateContainerView()
     }
-    
 }
 
 extension ContainerViewController: MapViewControllerDelegate {

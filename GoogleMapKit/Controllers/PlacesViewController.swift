@@ -18,7 +18,6 @@ class PlacesViewController: UIViewController {
         super.viewDidAppear(animated)
         placesTableView.reloadData()
     }
-    
 }
 
 extension PlacesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -33,6 +32,4 @@ extension PlacesViewController: UITableViewDataSource, UITableViewDelegate {
         }
         return cell
     }
-    
-    
 }
