@@ -16,9 +16,23 @@ class MapViewController: UIViewController {
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 7.0
     weak var delegate : MapViewControllerDelegate?
-    var selectedMarker: GMSMarker?
-    var selectedPlace: GMSPlace?
+    var currentMarker: GMSMarker!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var MapViewConteiner: GMSMapView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setup()
+    }
+    
+    @IBAction func saveButtonAction(_ sender: Any) {
+        guard let marker = currentMarker else { return }
+        delegate?.addLikelyPlace(new: Place.init(cordinates: marker.position))
+    }
     
     private func setup() {
         locationManager = CLLocationManager()
@@ -31,73 +45,48 @@ class MapViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: 50,
                                               longitude: 50,
                                               zoom: zoomLevel)
-        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        mapView = GMSMapView.map(withFrame: MapViewConteiner.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
         mapView.delegate = self
         view.addSubview(mapView)
         mapView.isHidden = true
-    }
-    
-    private func mapViewConstraints() {
-        mapView.translatesAutoresizingMaskIntoConstraints = false
-        mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        mapView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 114).isActive = true
-        mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        mapViewConstraints()
-    }
-    
-    @IBAction func saveButtonAction(_ sender: Any) {
-        guard let marker = selectedMarker, let title = selectedMarker?.title else { return }
-        delegate?.addLikelyPlace(new: Place.init(cordinates: marker.position, name: title))
+        MapViewConteiner.addSubview(mapView)
     }
 
-    
 }
 
 extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        guard var selectedMarker = selectedMarker else { return }
         mapView.clear()
-        selectedMarker = GMSMarker(position: position.target)
-        selectedMarker.map = mapView
+        currentMarker = GMSMarker(position: position.target)
+        currentMarker.map = mapView
+        mapView.selectedMarker = currentMarker
     }
     
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        guard var selectedMarker = selectedMarker else { return }
         mapView.clear()
-        selectedMarker.map = nil
-        selectedMarker = GMSMarker(position: position.target)
+        currentMarker = GMSMarker(position: position.target)
         let coder = GMSGeocoder()
-        coder.reverseGeocodeCoordinate(selectedMarker.position) { (response, error) in
+        coder.reverseGeocodeCoordinate(currentMarker.position) { (response, error) in
             if error != nil { return }
             guard let title = response?.firstResult()?.addressLine1() else { return }
-            selectedMarker.title = title
+            self.currentMarker?.title = title
+            self.currentMarker.map = mapView
+            mapView.selectedMarker = self.currentMarker
         }
-        selectedMarker.map = mapView
-        mapView.selectedMarker = selectedMarker
+        currentMarker.map = mapView
+        mapView.selectedMarker = currentMarker
     }
-    
-    
     
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
         print("Location: \(location)")
         let marker = GMSMarker()
-        selectedMarker = marker
+        currentMarker = marker
         marker.position = location.coordinate
         marker.map = mapView
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,

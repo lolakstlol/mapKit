@@ -18,10 +18,12 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>Description</string>
     <key>NSLocationAlwaysUsageDescription</key>
-    <string>Reason to access location background usage description</string>
+    <string>Will you allow this app to always know your location?</string>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>Reason to access location usage description</string>
+    <string>Do you allow this app to know your current location?</string>
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>googlechromes</string>

@@ -14,6 +14,12 @@ class PlacesViewController: UIViewController {
         places.append(contentsOf: newPlaces)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        placesTableView.reloadData()
+    }
+    
+    
 }
 
 extension PlacesViewController: UITableViewDataSource, UITableViewDelegate {
@@ -23,7 +29,9 @@ extension PlacesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = places[indexPath.row].name
+        places[indexPath.row].getName { (adress) in
+            cell.textLabel?.text = adress
+        }
         return cell
     }
     

@@ -27,7 +27,7 @@ class ContainerViewController: UIViewController {
     private func configureMapViewController() {
         mapButton.isEnabled = false
         listButton.isEnabled = true
-        let newController = MapViewController()
+        let newController: MapViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         newController.delegate = self
         controller = newController
         containerView.subviews.last?.removeFromSuperview()
@@ -38,7 +38,7 @@ class ContainerViewController: UIViewController {
     private func configureListViewController() {
         mapButton.isEnabled = true
         listButton.isEnabled = false
-        let newController = PlacesViewController()
+        let newController: PlacesViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PlacesViewController") as! PlacesViewController
         //newController.delegate = self
         newController.setPlaces(newPlaces: likelyPlaces)
         controller = newController

@@ -66,7 +66,7 @@
         <!--Map View Controller-->
         <scene sceneID="dTR-ap-J02">
             <objects>
-                <viewController id="1aQ-pM-4Ro" customClass="MapViewController" customModule="GoogleMapKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="1aQ-pM-4Ro" customClass="MapViewController" customModule="GoogleMapKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WLd-an-vlk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,16 +85,25 @@
                                     <action selector="saveButtonAction:" destination="1aQ-pM-4Ro" eventType="touchUpInside" id="CpT-0b-Gvu"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MFK-SF-2kS" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="IKn-jm-hcc" firstAttribute="bottom" secondItem="MFK-SF-2kS" secondAttribute="bottom" id="1Qi-Af-Eic"/>
                             <constraint firstItem="MZJ-zW-2p2" firstAttribute="trailing" secondItem="IKn-jm-hcc" secondAttribute="trailing" id="JF9-pK-Qwl"/>
+                            <constraint firstItem="IKn-jm-hcc" firstAttribute="trailing" secondItem="MFK-SF-2kS" secondAttribute="trailing" id="PYQ-Qy-ZEj"/>
                             <constraint firstItem="MZJ-zW-2p2" firstAttribute="top" secondItem="IKn-jm-hcc" secondAttribute="top" id="UAb-O0-Oer"/>
+                            <constraint firstItem="MFK-SF-2kS" firstAttribute="leading" secondItem="IKn-jm-hcc" secondAttribute="leading" id="Ulh-pg-HEZ"/>
+                            <constraint firstItem="MFK-SF-2kS" firstAttribute="top" secondItem="MZJ-zW-2p2" secondAttribute="bottom" id="aAQ-ch-dnh"/>
                             <constraint firstItem="MZJ-zW-2p2" firstAttribute="leading" secondItem="IKn-jm-hcc" secondAttribute="leading" id="iUY-ST-Zj1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IKn-jm-hcc"/>
                     </view>
                     <connections>
+                        <outlet property="MapViewConteiner" destination="MFK-SF-2kS" id="PAn-Q3-5gz"/>
                         <outlet property="saveButton" destination="MZJ-zW-2p2" id="YMe-QH-CeE"/>
                     </connections>
                 </viewController>
@@ -105,7 +114,7 @@
         <!--Places View Controller-->
         <scene sceneID="gVv-C0-p4J">
             <objects>
-                <viewController id="OAC-jo-MG6" customClass="PlacesViewController" customModule="GoogleMapKit" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlacesViewController" id="OAC-jo-MG6" customClass="PlacesViewController" customModule="GoogleMapKit" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jvZ-x2-5zu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
