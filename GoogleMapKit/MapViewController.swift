@@ -56,6 +56,13 @@ class MapViewController: UIViewController {
 
 extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
     
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        guard var selectedMarker = selectedMarker else { return }
+        mapView.clear()
+        selectedMarker = GMSMarker(position: position.target)
+        selectedMarker.map = mapView
+    }
+    
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         guard var selectedMarker = selectedMarker else { return }
         mapView.clear()
@@ -68,7 +75,6 @@ extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
             selectedMarker.title = title
         }
         selectedMarker.map = mapView
-        selectedMarker.accessibilityHint = "fdsfdsf"
     }
     
     

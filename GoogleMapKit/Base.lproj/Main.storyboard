@@ -55,6 +55,8 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="h8N-vN-o53" id="Lc9-De-LlX"/>
+                        <outlet property="listButton" destination="AQv-de-zYE" id="b9t-Dc-U0e"/>
+                        <outlet property="mapButton" destination="aGN-Hf-4TE" id="EMI-sc-mcn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -75,6 +77,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Poc-VA-eW1"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
                                 <state key="normal" title="Save Place">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -104,9 +107,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B4x-11-E7c">
-                                <rect key="frame" x="0.0" y="32" width="375" height="635"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="B4x-11-E7c">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="OAC-jo-MG6" id="b4g-0h-td1"/>
@@ -115,6 +117,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="B4x-11-E7c" firstAttribute="bottom" secondItem="8Vr-tL-tV1" secondAttribute="bottom" id="26C-T6-bix"/>
+                            <constraint firstItem="B4x-11-E7c" firstAttribute="trailing" secondItem="8Vr-tL-tV1" secondAttribute="trailing" id="DxX-Ll-WmM"/>
+                            <constraint firstItem="B4x-11-E7c" firstAttribute="top" secondItem="8Vr-tL-tV1" secondAttribute="top" id="E3i-q8-N6E"/>
+                            <constraint firstItem="B4x-11-E7c" firstAttribute="leading" secondItem="8Vr-tL-tV1" secondAttribute="leading" id="ziG-bk-qtW"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="8Vr-tL-tV1"/>
                     </view>
                     <connections>

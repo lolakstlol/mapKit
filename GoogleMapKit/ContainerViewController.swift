@@ -6,11 +6,14 @@ class ContainerViewController: UIViewController {
     
     var likelyPlaces : [PlaceProtocol] = []
     var controller : UIViewController!
+    @IBOutlet weak var mapButton: UIBarButtonItem!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var listButton: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureListViewController()
+        configureMapViewController()
     }
     
     @IBAction func listToolBarAction(_ sender: Any) {
@@ -22,26 +25,26 @@ class ContainerViewController: UIViewController {
     }
     
     private func configureMapViewController() {
-        if controller != nil {
-            controller.removeFromParent()
-        }
+        mapButton.isEnabled = false
+        listButton.isEnabled = true
         let newController = MapViewController()
         newController.delegate = self
         controller = newController
+        containerView.subviews.last?.removeFromSuperview()
         containerView.addSubview(controller.view)
         self.addChild(controller)
     }
     
     private func configureListViewController() {
-        if controller != nil {
-            controller.removeFromParent()
-        }
+        mapButton.isEnabled = true
+        listButton.isEnabled = false
         let newController = PlacesViewController()
         //newController.delegate = self
         newController.setPlaces(newPlaces: likelyPlaces)
         controller = newController
+        containerView.subviews.last?.removeFromSuperview()
         containerView.addSubview(controller.view)
-         self.addChild(controller)
+        self.addChild(controller)
     }
     
 }
