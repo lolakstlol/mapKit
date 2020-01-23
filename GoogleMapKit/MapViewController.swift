@@ -16,10 +16,9 @@ class MapViewController: UIViewController {
     var placesClient: GMSPlacesClient!
     var zoomLevel: Float = 7.0
     weak var delegate : MapViewControllerDelegate?
-    var likelyPlaces: [GMSPlace] = []
     var selectedMarker: GMSMarker?
     var selectedPlace: GMSPlace?
-    
+    @IBOutlet weak var saveButton: UIButton!
     
     private func setup() {
         locationManager = CLLocationManager()
@@ -32,7 +31,7 @@ class MapViewController: UIViewController {
         let camera = GMSCameraPosition.camera(withLatitude: 50,
                                               longitude: 50,
                                               zoom: zoomLevel)
-        mapView = GMSMapView.map(withFrame: CGRect(x: 0, y: 70, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 70), camera: camera)
+        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.isMyLocationEnabled = true
@@ -41,9 +40,18 @@ class MapViewController: UIViewController {
         mapView.isHidden = true
     }
     
+    private func mapViewConstraints() {
+        mapView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        mapView.topAnchor.constraint(equalTo: saveButton.bottomAnchor).isActive = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        mapViewConstraints()
     }
     
     @IBAction func saveButtonAction(_ sender: Any) {
@@ -75,7 +83,9 @@ extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
             selectedMarker.title = title
         }
         selectedMarker.map = mapView
+        mapView.selectedMarker = selectedMarker
     }
+    
     
     
     // Handle incoming location events.

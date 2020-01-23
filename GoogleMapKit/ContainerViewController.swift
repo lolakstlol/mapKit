@@ -13,7 +13,7 @@ class ContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureMapViewController()
+       configureMapViewController()
     }
     
     @IBAction func listToolBarAction(_ sender: Any) {
