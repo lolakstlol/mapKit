@@ -44,13 +44,17 @@ class MapViewController: UIViewController {
         mapView.translatesAutoresizingMaskIntoConstraints = false
         mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        mapView.topAnchor.constraint(equalTo: saveButton.bottomAnchor).isActive = true
+        mapView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height - 114).isActive = true
+        mapView.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         mapViewConstraints()
     }
     
