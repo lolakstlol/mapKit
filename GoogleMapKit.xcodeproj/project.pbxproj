@@ -15,6 +15,7 @@
 		151E6F9E23D8E4D2006169AA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E6F9D23D8E4D2006169AA /* MapViewController.swift */; };
 		151E6FA023D8E838006169AA /* PlacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E6F9F23D8E838006169AA /* PlacesViewController.swift */; };
 		151E6FA223D8E8A0006169AA /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151E6FA123D8E8A0006169AA /* Place.swift */; };
+		15C1C08123DA55B9002885D8 /* Extentions .swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C1C08023DA55B9002885D8 /* Extentions .swift */; };
 		7FECBD958E95CA750BA09BD5 /* Pods_GoogleMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E83447AA2053B36E3CFE0D61 /* Pods_GoogleMapKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		151E6F9D23D8E4D2006169AA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		151E6F9F23D8E838006169AA /* PlacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesViewController.swift; sourceTree = "<group>"; };
 		151E6FA123D8E8A0006169AA /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		15C1C08023DA55B9002885D8 /* Extentions .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extentions .swift"; sourceTree = "<group>"; };
 		8CF6084F826A7B2587269083 /* Pods-GoogleMapKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapKit.debug.xcconfig"; path = "Target Support Files/Pods-GoogleMapKit/Pods-GoogleMapKit.debug.xcconfig"; sourceTree = "<group>"; };
 		ACFB8F9D0B61BF7CA0C94EBC /* Pods-GoogleMapKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GoogleMapKit.release.xcconfig"; path = "Target Support Files/Pods-GoogleMapKit/Pods-GoogleMapKit.release.xcconfig"; sourceTree = "<group>"; };
 		E83447AA2053B36E3CFE0D61 /* Pods_GoogleMapKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GoogleMapKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +84,7 @@
 				151E6F8B23D8A387006169AA /* AppDelegate.swift */,
 				151E6F9223D8A388006169AA /* Assets.xcassets */,
 				151E6F9423D8A388006169AA /* LaunchScreen.storyboard */,
+				15C1C08023DA55B9002885D8 /* Extentions .swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				151E6FA023D8E838006169AA /* PlacesViewController.swift in Sources */,
 				151E6F8E23D8A387006169AA /* ContainerViewController.swift in Sources */,
 				151E6F9E23D8E4D2006169AA /* MapViewController.swift in Sources */,
+				15C1C08123DA55B9002885D8 /* Extentions .swift in Sources */,
 				151E6F8C23D8A387006169AA /* AppDelegate.swift in Sources */,
 				151E6FA223D8E8A0006169AA /* Place.swift in Sources */,
 			);

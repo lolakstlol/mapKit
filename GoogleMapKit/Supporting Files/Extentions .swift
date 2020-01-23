@@ -1,9 +1,15 @@
-//
-//  Extentions .swift
-//  GoogleMapKit
-//
-//  Created by Macbook on 24.01.2020.
-//  Copyright © 2020 EPLAN. All rights reserved.
-//
 
-import Foundation
+import UIKit
+
+// MARK: UIViewController
+extension UIViewController {
+    
+    class func loadFromStoryboard<T : UIViewController>() -> T {
+        let name = String(describing: T.self)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: name) as? T else {
+            fatalError("No VC \(name) SB")
+        }
+        return viewController
+    }
+}

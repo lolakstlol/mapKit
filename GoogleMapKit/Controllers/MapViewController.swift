@@ -3,29 +3,31 @@ import UIKit
 import GoogleMaps
 import GooglePlaces
 
-protocol MapViewControllerDelegate : class {
+protocol MapViewControllerDelegate: class {
     func addLikelyPlace(new place: PlaceProtocol)
 }
 
 class MapViewController: UIViewController {
     
+    private struct MapViewControllerConstants {
+        static let zoomLevel: Float = 7.0
+        static let defaultLat: Double = 53.893
+        static let defaultLng: Double = 27.567
+        static let locationManagerDistanceFilter: Double = 50
+    }
+    
     //Properties
-    var locationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var mapView: GMSMapView!
-    var placesClient: GMSPlacesClient!
-    var zoomLevel: Float = 7.0
-    weak var delegate : MapViewControllerDelegate?
-    var currentMarker: GMSMarker!
+    private var locationManager = CLLocationManager()
+    private var currentLocation: CLLocation?
+    private var mapView: GMSMapView!
+    private var placesClient: GMSPlacesClient!
+    weak var delegate: MapViewControllerDelegate?
+    private var currentMarker: GMSMarker!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var MapViewConteiner: GMSMapView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         setup()
     }
     
@@ -34,17 +36,19 @@ class MapViewController: UIViewController {
         delegate?.addLikelyPlace(new: Place.init(cordinates: marker.position))
     }
     
-    private func setup() {
+    private func locationManagerSetup() {
         locationManager = CLLocationManager()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
-        locationManager.distanceFilter = 50
+        locationManager.distanceFilter = MapViewControllerConstants.locationManagerDistanceFilter
         locationManager.startUpdatingLocation()
         locationManager.delegate = self
-        placesClient = GMSPlacesClient.shared()
-        let camera = GMSCameraPosition.camera(withLatitude: 50,
-                                              longitude: 50,
-                                              zoom: zoomLevel)
+    }
+    
+    private func mapSetup() {
+        let camera = GMSCameraPosition.camera(withLatitude: MapViewControllerConstants.defaultLat,
+                                              longitude: MapViewControllerConstants.defaultLng,
+                                              zoom: MapViewControllerConstants.zoomLevel)
         mapView = GMSMapView.map(withFrame: MapViewConteiner.bounds, camera: camera)
         mapView.settings.myLocationButton = true
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -54,10 +58,17 @@ class MapViewController: UIViewController {
         mapView.isHidden = true
         MapViewConteiner.addSubview(mapView)
     }
+    
+    private func setup() {
+        locationManagerSetup()
+        mapSetup()
+        placesClient = GMSPlacesClient.shared()
+        
+    }
 
 }
 
-extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
+extension MapViewController: GMSMapViewDelegate, CLLocationManagerDelegate {
     
     func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
         mapView.clear()
@@ -69,11 +80,9 @@ extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
     func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
         mapView.clear()
         currentMarker = GMSMarker(position: position.target)
-        let coder = GMSGeocoder()
-        coder.reverseGeocodeCoordinate(currentMarker.position) { (response, error) in
-            if error != nil { return }
-            guard let title = response?.firstResult()?.addressLine1() else { return }
-            self.currentMarker?.title = title
+        let currentPlace = Place.init(cordinates: currentMarker.position)
+        currentPlace.getName { (name) in
+            self.currentMarker?.title = name
             self.currentMarker.map = mapView
             mapView.selectedMarker = self.currentMarker
         }
@@ -84,14 +93,13 @@ extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
     // Handle incoming location events.
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location: CLLocation = locations.last!
-        print("Location: \(location)")
         let marker = GMSMarker()
         currentMarker = marker
         marker.position = location.coordinate
         marker.map = mapView
         let camera = GMSCameraPosition.camera(withLatitude: location.coordinate.latitude,
                                               longitude: location.coordinate.longitude,
-                                              zoom: zoomLevel)
+                                              zoom: MapViewControllerConstants.zoomLevel)
         if mapView.isHidden {
             mapView.isHidden = false
             mapView.camera = camera
@@ -107,7 +115,6 @@ extension MapViewController : GMSMapViewDelegate, CLLocationManagerDelegate {
             print("Location access was restricted.")
         case .denied:
             print("User denied access to location.")
-            // Display the map using the default location.
             mapView.isHidden = false
         case .notDetermined:
             print("Location status not determined.")

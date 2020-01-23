@@ -3,7 +3,7 @@ import UIKit
 
 class PlacesViewController: UIViewController {
 
-    private var places : [PlaceProtocol] = []
+    private var places: [PlaceProtocol] = []
     @IBOutlet weak var placesTableView: UITableView!
     
     override func viewDidLoad() {
@@ -18,7 +18,6 @@ class PlacesViewController: UIViewController {
         super.viewDidAppear(animated)
         placesTableView.reloadData()
     }
-    
     
 }
 
